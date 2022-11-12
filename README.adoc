@@ -58,12 +58,15 @@ toc::[]
 
 == Setup
 
-To install, run:
+The easiest way to install this version of `rubysmith` is via the
+link:https://github.com/rdp/specific_install[`specific_install`] gem, which will pull and build the
+`rubysmith` gem directly from the `master` branch of this repo:
 
 [source,bash]
-----
-gem install rubysmith
-----
+```
+gem install specific_install
+gem specific_install davidrunger/rubysmith
+```
 
 == Usage
 
