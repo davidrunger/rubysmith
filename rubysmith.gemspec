@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name = "rubysmith"
-  spec.version = "3.8.0"
+  spec.version = "3.8.1"
   spec.authors = ["Brooke Kuhlmann"]
   spec.email = ["brooke@alchemists.io"]
   spec.homepage = "https://github.com/bkuhlmann/rubysmith"
@@ -18,9 +18,6 @@ Gem::Specification.new do |spec|
     "rubygems_mfa_required" => "true",
     "source_code_uri" => "https://github.com/bkuhlmann/rubysmith"
   }
-
-  spec.signing_key = Gem.default_key_path
-  spec.cert_chain = [Gem.default_cert_path]
 
   spec.required_ruby_version = "~> 3.1"
   spec.add_dependency "cogger", "~> 0.4"

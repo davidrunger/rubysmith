@@ -24,7 +24,7 @@ toc::[]
 * Uses link:https://www.alchemists.io/projects/pragmater[Pragmater] for Ruby source pragma directives.
 * Supports link:https://github.com/amazing-print/amazing_print[Amazing Print].
 * Supports link:https://github.com/rubymem/bundler-leak[Bundler Leak].
-* Supports link:https://www.alchemists.io/projects/caliber[Caliber].
+* Supports link:https://github.com/davidrunger/runger_style/[RungerStyle].
 * Supports link:https://circleci.com[Circle CI].
 * Supports link:https://orcid.org[Citations (ORCID)].
 * Supports console script for local development.
@@ -82,7 +82,7 @@ USAGE:
 BUILD OPTIONS:
       --[no-]amazing_print                 Add Amazing Print gem. Default: true.
       --[no-]bundler-leak                  Add Bundler Leak gem. Default: true.
-      --[no-]caliber                       Add Caliber gem. Default: true.
+      --[no-]runger_style                  Add RungerStyle gem. Default: true.
       --[no-]circle_ci                     Add Circle CI configuration and badge. Default: false.
       --[no-]citation                      Add citation documentation. Default: true.
       --[no-]community                     Add community documentation. Default: false.
@@ -175,12 +175,12 @@ The `--bundler-leak` option allows you to build your project with the
 link:https://github.com/rubymem/bundler-leak[Bundler Leak] gem which helps detect memory leaks in
 your gem dependencies.
 
-===== Caliber
+===== RungerStyle
 
-The `--caliber` option allows you to build your project with the
-link:https://www.alchemists.io/projects/caliber[Caliber] gem so you have an immediate working -- and
-high quality -- link:https://docs.rubocop.org/rubocop[RuboCop] configuration. Read the Caliber
-documentation for further customization.
+The `--runger_style` option allows you to build your project with the
+link:https://github.com/davidrunger/runger_style/[RungerStyle] gem so you have an immediate working
+-- and high quality -- link:https://docs.rubocop.org/rubocop[RuboCop] configuration. Read the
+RungerStyle documentation for further customization.
 
 ===== Circle CI
 
@@ -352,7 +352,7 @@ variables. The default configuration is as follows:
 :build:
   :amazing_print: true
   :bundler_leak: true
-  :caliber: true
+  :runger_style: true
   :circle_ci: false
   :citation: true
   :cli: false

@@ -13,8 +13,8 @@ group :code_quality do
   <% if configuration.build_bundler_leak %>
     gem "bundler-leak", "~> 0.2"
   <% end %>
-  <% if configuration.build_caliber %>
-    gem "caliber", "~> 0.16"
+  <% if configuration.build_runger_style %>
+    gem 'runger_style', github: 'davidrunger/runger_style', require: false
   <% end %>
   <% if configuration.build_git && configuration.build_git_lint %>
     gem "git-lint", "~> 4.0"
