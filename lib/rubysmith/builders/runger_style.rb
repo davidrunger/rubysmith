@@ -4,8 +4,8 @@ require "refinements/structs"
 
 module Rubysmith
   module Builders
-    # Builds project skeleton with Caliber style support.
-    class Caliber
+    # Builds project skeleton with RungerStyle style support.
+    class RungerStyle
       using Refinements::Structs
 
       def self.call(...) = new(...).call
@@ -16,7 +16,7 @@ module Rubysmith
       end
 
       def call
-        return configuration unless configuration.build_caliber
+        return configuration unless configuration.build_runger_style
 
         builder.call(configuration.merge(template_path: "%project_name%/bin/rubocop.erb"))
                .render

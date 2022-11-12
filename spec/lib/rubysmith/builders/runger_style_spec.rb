@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe Rubysmith::Builders::Caliber do
+RSpec.describe Rubysmith::Builders::RungerStyle do
   using Refinements::Pathnames
   using Refinements::Structs
 
@@ -17,7 +17,7 @@ RSpec.describe Rubysmith::Builders::Caliber do
 
   describe "#call" do
     context "when enabled" do
-      let(:test_configuration) { configuration.minimize.merge build_caliber: true }
+      let(:test_configuration) { configuration.minimize.merge build_runger_style: true }
 
       it "builds binstub" do
         builder.call
@@ -41,7 +41,8 @@ RSpec.describe Rubysmith::Builders::Caliber do
 
         expect(configuration_path.read).to eq(<<~CONTENT)
           inherit_gem:
-            caliber: config/all.yml
+            runger_style:
+              - rulesets/default.yml
         CONTENT
       end
     end

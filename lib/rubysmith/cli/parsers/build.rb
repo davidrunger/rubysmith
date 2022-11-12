@@ -52,12 +52,12 @@ module Rubysmith
           end
         end
 
-        def add_caliber
+        def add_runger_style
           client.on(
-            "--[no-]caliber",
-            "Add Caliber gem. #{default __method__}."
+            "--[no-]runger_style",
+            "Add RungerStyle gem. #{default __method__}."
           ) do |value|
-            configuration.merge! build_caliber: value
+            configuration.merge! build_runger_style: value
           end
         end
 

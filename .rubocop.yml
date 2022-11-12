@@ -1,6 +1,3 @@
 inherit_gem:
-  caliber: config/all.yml
-
-Metrics/ClassLength:
-  Exclude:
-    - "lib/rubysmith/cli/parsers/build.rb"
+  runger_style:
+    - rulesets/default.yml

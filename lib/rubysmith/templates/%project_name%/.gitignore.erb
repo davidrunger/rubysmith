@@ -1,8 +1,11 @@
-.bundle
+/.bundle
 <% if configuration.build_yard %>
   .yardoc
 <% end %>
 <% if configuration.build_yard %>
   doc/yard
 <% end %>
-tmp
+<% if configuration.build_simple_cov %>
+  /coverage/
+<% end %>
+/tmp/
