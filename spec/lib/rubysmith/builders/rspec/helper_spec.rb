@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::RSpec::Helper do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:spec_helper_path) { temp_dir.join "test/spec/spec_helper.rb" }
+  let(:spec_helper_path) { temp_dir.join('test/spec/spec_helper.rb') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
+  describe '#call' do
     before { builder.call }
 
-    context "when enabled with no options" do
-      let(:test_configuration) { configuration.minimize.merge build_rspec: true }
+    context 'when enabled with no options' do
+      let(:test_configuration) { configuration.minimize.merge(build_rspec: true) }
 
       let :proof do
         <<~BODY
@@ -51,14 +51,14 @@ RSpec.describe Rubysmith::Builders::RSpec::Helper do
         BODY
       end
 
-      it "builds spec helper" do
+      it 'builds spec helper' do
         expect(spec_helper_path.read).to eq(proof)
       end
     end
 
-    context "when enabled with dashed project name" do
+    context 'when enabled with dashed project name' do
       let :test_configuration do
-        configuration.minimize.merge project_name: "demo-test", build_rspec: true
+        configuration.minimize.merge(project_name: 'demo-test', build_rspec: true)
       end
 
       let :proof do
@@ -93,14 +93,14 @@ RSpec.describe Rubysmith::Builders::RSpec::Helper do
         BODY
       end
 
-      it "builds spec helper" do
-        expect(temp_dir.join("demo-test/spec/spec_helper.rb").read).to eq(proof)
+      it 'builds spec helper' do
+        expect(temp_dir.join('demo-test/spec/spec_helper.rb').read).to eq(proof)
       end
     end
 
-    context "when enabled with Refinements only" do
+    context 'when enabled with Refinements only' do
       let :test_configuration do
-        configuration.minimize.merge build_rspec: true, build_refinements: true
+        configuration.minimize.merge(build_rspec: true, build_refinements: true)
       end
 
       let :proof do
@@ -138,14 +138,14 @@ RSpec.describe Rubysmith::Builders::RSpec::Helper do
         BODY
       end
 
-      it "builds spec helper" do
+      it 'builds spec helper' do
         expect(spec_helper_path.read).to eq(proof)
       end
     end
 
-    context "when enabled with SimpleCov only" do
+    context 'when enabled with SimpleCov only' do
       let :test_configuration do
-        configuration.minimize.merge build_rspec: true, build_simple_cov: true
+        configuration.minimize.merge(build_rspec: true, build_simple_cov: true)
       end
 
       let :proof do
@@ -190,12 +190,12 @@ RSpec.describe Rubysmith::Builders::RSpec::Helper do
         BODY
       end
 
-      it "builds spec helper" do
+      it 'builds spec helper' do
         expect(spec_helper_path.read).to eq(proof)
       end
     end
 
-    context "when enabled with all options" do
+    context 'when enabled with all options' do
       let(:test_configuration) { configuration.maximize }
 
       let :proof do
@@ -243,12 +243,12 @@ RSpec.describe Rubysmith::Builders::RSpec::Helper do
         BODY
       end
 
-      it "builds spec helper" do
+      it 'builds spec helper' do
         expect(spec_helper_path.read).to eq(proof)
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
       it "doesn't build spec helper" do

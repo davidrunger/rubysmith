@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::Guard do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:binstub_path) { temp_dir.join "test", "bin", "guard" }
-  let(:configuration_path) { temp_dir.join "test", "Guardfile" }
+  let(:binstub_path) { temp_dir.join('test', 'bin', 'guard') }
+  let(:configuration_path) { temp_dir.join('test', 'Guardfile') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
+  describe '#call' do
     before { builder.call }
 
-    context "when enabled" do
-      let(:test_configuration) { configuration.minimize.merge build_guard: true }
+    context 'when enabled' do
+      let(:test_configuration) { configuration.minimize.merge(build_guard: true) }
 
-      it "builds binstub" do
+      it 'builds binstub' do
         expect(binstub_path.read).to eq(<<~CONTENT)
           #! /usr/bin/env ruby
 
@@ -30,7 +30,7 @@ RSpec.describe Rubysmith::Builders::Guard do
         CONTENT
       end
 
-      it "builds configuration" do
+      it 'builds configuration' do
         expect(configuration_path.read).to eq(<<~CONTENT)
           guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec --format documentation" do
             watch %r(^spec/.+_spec\\.rb$)
@@ -40,13 +40,13 @@ RSpec.describe Rubysmith::Builders::Guard do
         CONTENT
       end
 
-      it "updates file permissions" do
+      it 'updates file permissions' do
         builder.call
-        expect(binstub_path.stat.mode).to eq(33261)
+        expect(binstub_path.stat.mode).to eq(33_261)
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
       it "doesn't build binstub" do

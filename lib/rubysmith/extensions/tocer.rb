@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "tocer"
-require "refinements/structs"
+require 'tocer'
+require 'refinements/structs'
 
 module Rubysmith
   module Extensions
@@ -11,16 +11,18 @@ module Rubysmith
 
       def self.call(...) = new(...).call
 
-      def initialize configuration,
-                     client: ::Tocer::Runner.new,
-                     content: ::Tocer::Configuration::Content.new
+      def initialize(
+        configuration,
+        client: ::Tocer::Runner.new,
+        content: ::Tocer::Configuration::Content.new
+      )
         @configuration = configuration
         @client = client
         @content = content
       end
 
       def call
-        client.call settings if configuration.build_readme
+        client.call(settings) if configuration.build_readme
         configuration
       end
 
@@ -29,10 +31,10 @@ module Rubysmith
       attr_reader :configuration, :client, :content
 
       def settings
-        content.merge(root_dir: configuration.project_root)
-               .transmute! configuration,
-                           includes: :extensions_tocer_includes,
-                           label: :extensions_tocer_label
+        content.merge(root_dir: configuration.project_root).
+          transmute!(configuration,
+            includes: :extensions_tocer_includes,
+            label: :extensions_tocer_label)
       end
     end
   end

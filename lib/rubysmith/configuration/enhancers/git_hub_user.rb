@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "git_plus"
-require "refinements/strings"
-require "refinements/structs"
+require 'git_plus'
+require 'refinements/strings'
+require 'refinements/structs'
 
 module Rubysmith
   module Configuration
@@ -12,11 +12,11 @@ module Rubysmith
         using Refinements::Strings
         using Refinements::Structs
 
-        def initialize repository: GitPlus::Repository.new
+        def initialize(repository: GitPlus::Repository.new)
           @repository = repository
         end
 
-        def call content
+        def call(content)
           String(content.git_hub_user).blank? ? content.merge(git_hub_user: user) : content
         end
 
@@ -24,7 +24,7 @@ module Rubysmith
 
         attr_reader :repository
 
-        def user = repository.config_get("github.user")
+        def user = repository.config_get('github.user')
       end
     end
   end

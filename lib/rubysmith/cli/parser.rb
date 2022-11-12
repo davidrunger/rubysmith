@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "optparse"
+require 'optparse'
 
 module Rubysmith
   module CLI
@@ -8,19 +8,19 @@ module Rubysmith
     class Parser
       include Import[:configuration]
 
-      CLIENT = OptionParser.new nil, 40, "  "
+      CLIENT = OptionParser.new(nil, 40, '  ')
       SECTIONS = [Parsers::Core, Parsers::Build].freeze # Order is important.
 
-      def initialize sections: SECTIONS, client: CLIENT, **dependencies
+      def initialize(sections: SECTIONS, client: CLIENT, **dependencies)
         super(**dependencies)
         @sections = sections
         @client = client
         @configuration_duplicate = configuration.dup
       end
 
-      def call arguments = []
-        sections.each { |section| section.call configuration_duplicate, client: }
-        client.parse arguments
+      def call(arguments = [])
+        sections.each { |section| section.call(configuration_duplicate, client:) }
+        client.parse(arguments)
         configuration_duplicate.freeze
       end
 

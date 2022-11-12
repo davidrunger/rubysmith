@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::Bundler do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:gemfile_path) { temp_dir.join "test", "Gemfile" }
+  let(:gemfile_path) { temp_dir.join('test', 'Gemfile') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
-    context "with minimum options" do
+  describe '#call' do
+    context 'with minimum options' do
       let(:test_configuration) { configuration.minimize }
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
 
         expect(gemfile_path.read).to eq(<<~CONTENT)
@@ -29,8 +29,8 @@ RSpec.describe Rubysmith::Builders::Bundler do
       end
     end
 
-    context "with Amazing Print only" do
-      let(:test_configuration) { configuration.minimize.merge build_amazing_print: true }
+    context 'with Amazing Print only' do
+      let(:test_configuration) { configuration.minimize.merge(build_amazing_print: true) }
 
       let :proof do
         <<~CONTENT
@@ -44,14 +44,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Bundler Leak only" do
-      let(:test_configuration) { configuration.minimize.merge build_bundler_leak: true }
+    context 'with Bundler Leak only' do
+      let(:test_configuration) { configuration.minimize.merge(build_bundler_leak: true) }
 
       let :proof do
         <<~CONTENT
@@ -65,14 +65,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with RungerStyle only" do
-      let(:test_configuration) { configuration.minimize.merge build_runger_style: true }
+    context 'with RungerStyle only' do
+      let(:test_configuration) { configuration.minimize.merge(build_runger_style: true) }
 
       let :proof do
         <<~CONTENT
@@ -86,14 +86,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Debug only" do
-      let(:test_configuration) { configuration.minimize.merge build_debug: true }
+    context 'with Debug only' do
+      let(:test_configuration) { configuration.minimize.merge(build_debug: true) }
 
       let :proof do
         <<~CONTENT
@@ -107,15 +107,15 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Git and Git Lint only" do
+    context 'with Git and Git Lint only' do
       let :test_configuration do
-        configuration.minimize.merge build_git: true, build_git_lint: true
+        configuration.minimize.merge(build_git: true, build_git_lint: true)
       end
 
       let :proof do
@@ -130,14 +130,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Guard only" do
-      let(:test_configuration) { configuration.minimize.merge build_guard: true }
+    context 'with Guard only' do
+      let(:test_configuration) { configuration.minimize.merge(build_guard: true) }
 
       let :proof do
         <<~CONTENT
@@ -151,14 +151,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Rake only" do
-      let(:test_configuration) { configuration.minimize.merge build_rake: true }
+    context 'with Rake only' do
+      let(:test_configuration) { configuration.minimize.merge(build_rake: true) }
 
       let :proof do
         <<~CONTENT
@@ -172,14 +172,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Reek only" do
-      let(:test_configuration) { configuration.minimize.merge build_reek: true }
+    context 'with Reek only' do
+      let(:test_configuration) { configuration.minimize.merge(build_reek: true) }
 
       let :proof do
         <<~CONTENT
@@ -193,14 +193,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Refinements only" do
-      let(:test_configuration) { configuration.minimize.merge build_refinements: true }
+    context 'with Refinements only' do
+      let(:test_configuration) { configuration.minimize.merge(build_refinements: true) }
 
       let :proof do
         <<~CONTENT
@@ -212,14 +212,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with RSpec only" do
-      let(:test_configuration) { configuration.minimize.merge build_rspec: true }
+    context 'with RSpec only' do
+      let(:test_configuration) { configuration.minimize.merge(build_rspec: true) }
 
       let :proof do
         <<~CONTENT
@@ -233,14 +233,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with SimpleCov only" do
-      let(:test_configuration) { configuration.minimize.merge build_simple_cov: true }
+    context 'with SimpleCov only' do
+      let(:test_configuration) { configuration.minimize.merge(build_simple_cov: true) }
 
       let :proof do
         <<~CONTENT
@@ -254,14 +254,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with YARD only" do
-      let(:test_configuration) { configuration.minimize.merge build_yard: true }
+    context 'with YARD only' do
+      let(:test_configuration) { configuration.minimize.merge(build_yard: true) }
 
       let :proof do
         <<~CONTENT
@@ -276,15 +276,15 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with YARD only using Markdown" do
+    context 'with YARD only using Markdown' do
       let :test_configuration do
-        configuration.minimize.merge build_yard: true, documentation_format: "md"
+        configuration.minimize.merge(build_yard: true, documentation_format: 'md')
       end
 
       let :proof do
@@ -300,14 +300,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Zeitwerk only" do
-      let(:test_configuration) { configuration.minimize.merge build_zeitwerk: true }
+    context 'with Zeitwerk only' do
+      let(:test_configuration) { configuration.minimize.merge(build_zeitwerk: true) }
 
       let :proof do
         <<~CONTENT
@@ -319,14 +319,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with Markdown only" do
-      let(:test_configuration) { configuration.minimize.merge documentation_format: "md" }
+    context 'with Markdown only' do
+      let(:test_configuration) { configuration.minimize.merge(documentation_format: 'md') }
 
       let :proof do
         <<~CONTENT
@@ -340,14 +340,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with all options using ASCII Doc" do
-      let(:test_configuration) { configuration.maximize.merge documentation_format: "adoc" }
+    context 'with all options using ASCII Doc' do
+      let(:test_configuration) { configuration.maximize.merge(documentation_format: 'adoc') }
 
       let :proof do
         <<~CONTENT
@@ -384,14 +384,14 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end
     end
 
-    context "with all options using Markdown" do
-      let(:test_configuration) { configuration.maximize.merge documentation_format: "md" }
+    context 'with all options using Markdown' do
+      let(:test_configuration) { configuration.maximize.merge(documentation_format: 'md') }
 
       let :proof do
         <<~CONTENT
@@ -428,7 +428,7 @@ RSpec.describe Rubysmith::Builders::Bundler do
         CONTENT
       end
 
-      it "builds Gemfile" do
+      it 'builds Gemfile' do
         builder.call
         expect(gemfile_path.read).to eq(proof)
       end

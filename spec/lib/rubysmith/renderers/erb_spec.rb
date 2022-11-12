@@ -1,33 +1,33 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Renderers::ERB do
   using Refinements::Structs
 
-  subject(:renderer) { described_class.new test_configuration }
+  subject(:renderer) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  describe "#call" do
+  describe '#call' do
     let(:test_configuration) { configuration.minimize }
 
-    it "answers evaluated result" do
-      expect(renderer.call("Name: <%= configuration.project_name %>.")).to eq("Name: test.")
+    it 'answers evaluated result' do
+      expect(renderer.call('Name: <%= configuration.project_name %>.')).to eq('Name: test.')
     end
 
-    it "trims conditional new lines" do
+    it 'trims conditional new lines' do
       content = <<~TEMPLATE
         <% if configuration.project_name == "invalid" %>
           This is not valid.
         <% end %>
       TEMPLATE
 
-      expect(renderer.call(content)).to eq("")
+      expect(renderer.call(content)).to eq('')
     end
 
-    context "with content before namespace" do
-      let(:test_configuration) { configuration.minimize.merge project_name: "example" }
+    context 'with content before namespace' do
+      let(:test_configuration) { configuration.minimize.merge(project_name: 'example') }
 
       let :content do
         <<~CONTENT
@@ -36,8 +36,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
         CONTENT
       end
 
-      it "renders content plus namespace" do
-        expectation = renderer.call content
+      it 'renders content plus namespace' do
+        expectation = renderer.call(content)
 
         expect(expectation).to eq(<<~PROOF)
           # Before.
@@ -47,8 +47,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
       end
     end
 
-    context "with content before namespace block" do
-      let(:test_configuration) { configuration.minimize.merge project_name: "example" }
+    context 'with content before namespace block' do
+      let(:test_configuration) { configuration.minimize.merge(project_name: 'example') }
 
       let :content do
         <<~CONTENT
@@ -60,8 +60,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
         CONTENT
       end
 
-      it "renders content plus namespace" do
-        expectation = renderer.call content
+      it 'renders content plus namespace' do
+        expectation = renderer.call(content)
 
         expect(expectation).to eq(<<~PROOF)
           require "logger"
@@ -73,8 +73,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
       end
     end
 
-    context "with content after namespace" do
-      let(:test_configuration) { configuration.minimize.merge project_name: "example" }
+    context 'with content after namespace' do
+      let(:test_configuration) { configuration.minimize.merge(project_name: 'example') }
 
       let :content do
         <<~CONTENT
@@ -83,8 +83,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
         CONTENT
       end
 
-      it "renders namespace plus content" do
-        expectation = renderer.call content
+      it 'renders namespace plus content' do
+        expectation = renderer.call(content)
 
         expect(expectation).to eq(<<~PROOF)
           module Example
@@ -94,8 +94,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
       end
     end
 
-    context "with content after namespace block" do
-      let(:test_configuration) { configuration.minimize.merge project_name: "example" }
+    context 'with content after namespace block' do
+      let(:test_configuration) { configuration.minimize.merge(project_name: 'example') }
 
       let :content do
         <<~CONTENT
@@ -107,8 +107,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
         CONTENT
       end
 
-      it "renders namespace plus content" do
-        expectation = renderer.call content
+      it 'renders namespace plus content' do
+        expectation = renderer.call(content)
 
         expect(expectation).to eq(<<~PROOF)
           module Example
@@ -120,8 +120,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
       end
     end
 
-    context "with single lined namespace" do
-      let(:test_configuration) { configuration.minimize.merge project_name: "example" }
+    context 'with single lined namespace' do
+      let(:test_configuration) { configuration.minimize.merge(project_name: 'example') }
 
       let :content do
         <<~CONTENT
@@ -131,8 +131,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
         CONTENT
       end
 
-      it "renders single namespace" do
-        expectation = renderer.call content
+      it 'renders single namespace' do
+        expectation = renderer.call(content)
 
         expect(expectation).to eq(<<~PROOF)
           module Example
@@ -142,13 +142,13 @@ RSpec.describe Rubysmith::Renderers::ERB do
       end
     end
 
-    context "with empty namespace" do
-      let(:test_configuration) { configuration.minimize.merge project_name: "example" }
+    context 'with empty namespace' do
+      let(:test_configuration) { configuration.minimize.merge(project_name: 'example') }
 
-      let(:content) { "<% namespace %>" }
+      let(:content) { '<% namespace %>' }
 
-      it "renders single namespace" do
-        expectation = renderer.call content
+      it 'renders single namespace' do
+        expectation = renderer.call(content)
 
         expect(expectation).to eq(<<~PROOF)
           module Example
@@ -157,12 +157,12 @@ RSpec.describe Rubysmith::Renderers::ERB do
       end
     end
 
-    context "with empty namespaces" do
+    context 'with empty namespaces' do
       let :test_configuration do
-        configuration.minimize.merge project_name: "example-one-two"
+        configuration.minimize.merge(project_name: 'example-one-two')
       end
 
-      let(:content) { "<% namespace %>" }
+      let(:content) { '<% namespace %>' }
 
       let :proof do
         <<~PROOF
@@ -175,15 +175,15 @@ RSpec.describe Rubysmith::Renderers::ERB do
         PROOF
       end
 
-      it "renders multiple namespaces" do
-        expectation = renderer.call content
+      it 'renders multiple namespaces' do
+        expectation = renderer.call(content)
         expect(expectation).to eq(proof)
       end
     end
 
-    context "with filled namespaces" do
+    context 'with filled namespaces' do
       let :test_configuration do
-        configuration.minimize.merge project_name: "example-one-two"
+        configuration.minimize.merge(project_name: 'example-one-two')
       end
 
       let :content do
@@ -206,8 +206,8 @@ RSpec.describe Rubysmith::Renderers::ERB do
         PROOF
       end
 
-      it "renders multiple namespaces" do
-        expectation = renderer.call content
+      it 'renders multiple namespaces' do
+        expectation = renderer.call(content)
         expect(expectation).to eq(proof)
       end
     end

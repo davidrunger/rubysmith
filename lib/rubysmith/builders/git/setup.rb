@@ -7,7 +7,7 @@ module Rubysmith
       class Setup
         def self.call(...) = new(...).call
 
-        def initialize configuration, builder: Builder
+        def initialize(configuration, builder: Builder)
           @configuration = configuration
           @builder = builder
         end
@@ -15,7 +15,7 @@ module Rubysmith
         def call
           return configuration unless configuration.build_git
 
-          builder.call(configuration).run("git init", chdir: configuration.project_name)
+          builder.call(configuration).run('git init', chdir: configuration.project_name)
           configuration
         end
 

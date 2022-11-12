@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "refinements/structs"
+require 'refinements/structs'
 
 module Rubysmith
   module Builders
@@ -10,7 +10,7 @@ module Rubysmith
 
       def self.call(...) = new(...).call
 
-      def initialize configuration, builder: Builder
+      def initialize(configuration, builder: Builder)
         @configuration = configuration
         @builder = builder
       end
@@ -32,16 +32,16 @@ module Rubysmith
       def render_funding
         return unless configuration.build_funding
 
-        configuration.merge(template_path: "%project_name%/.github/FUNDING.yml.erb")
-                     .then { |updated_configuration| builder.call(updated_configuration).render }
+        configuration.merge(template_path: '%project_name%/.github/FUNDING.yml.erb').
+          then { |updated_configuration| builder.call(updated_configuration).render }
       end
 
       def with_issue_template
-        configuration.merge template_path: "%project_name%/.github/ISSUE_TEMPLATE.md.erb"
+        configuration.merge(template_path: '%project_name%/.github/ISSUE_TEMPLATE.md.erb')
       end
 
       def with_pull_request_template
-        configuration.merge template_path: "%project_name%/.github/PULL_REQUEST_TEMPLATE.md.erb"
+        configuration.merge(template_path: '%project_name%/.github/PULL_REQUEST_TEMPLATE.md.erb')
       end
     end
   end

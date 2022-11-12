@@ -7,16 +7,16 @@ module Rubysmith
       class Config
         include Rubysmith::Import[:kernel, :logger]
 
-        def initialize client: Configuration::Loader::CLIENT, **dependencies
+        def initialize(client: Configuration::Loader::CLIENT, **dependencies)
           super(**dependencies)
           @client = client
         end
 
-        def call selection
+        def call(selection)
           case selection
-            when :edit then edit
-            when :view then view
-            else logger.error { "Invalid configuration selection: #{selection}." }
+          when :edit then edit
+          when :view then view
+          else logger.error { "Invalid configuration selection: #{selection}." }
           end
         end
 

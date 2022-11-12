@@ -5,7 +5,7 @@ module Rubysmith
     module Actions
       # Handles parsing of Command Line Interface (CLI) publish options.
       class Publish
-        def initialize extension: Extensions::Milestoner
+        def initialize(extension: Extensions::Milestoner)
           @extension = extension
         end
 

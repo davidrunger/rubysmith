@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "milestoner"
+require 'milestoner'
 
 module Rubysmith
   module CLI
@@ -8,13 +8,13 @@ module Rubysmith
     class Shell
       include Actions::Import[:config, :build, :publish, :specification, :logger]
 
-      def initialize parser: Parser.new, **dependencies
+      def initialize(parser: Parser.new, **dependencies)
         super(**dependencies)
         @parser = parser
       end
 
-      def call arguments = []
-        perform parser.call(arguments)
+      def call(arguments = [])
+        perform(parser.call(arguments))
       rescue OptionParser::ParseError, Milestoner::Error => error
         logger.error { error.message }
       end
@@ -23,13 +23,13 @@ module Rubysmith
 
       attr_reader :parser
 
-      def perform configuration
+      def perform(configuration)
         case configuration
-          in action_config: Symbol => action then config.call action
-          in action_build: true then build.call configuration
-          in action_publish: true then publish.call configuration
-          in action_version: true then logger.info { specification.labeled_version }
-          else logger.any { parser.to_s }
+        in action_config: Symbol => action then config.call(action)
+        in action_build: true then build.call(configuration)
+        in action_publish: true then publish.call(configuration)
+        in action_version: true then logger.info { specification.labeled_version }
+        else logger.any { parser.to_s }
         end
       end
     end

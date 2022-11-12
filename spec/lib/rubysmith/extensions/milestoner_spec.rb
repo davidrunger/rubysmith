@@ -1,56 +1,56 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Extensions::Milestoner do
   using Refinements::Pathnames
   using Refinements::Structs
 
-  subject(:extension) { described_class.new test_configuration, client: }
+  subject(:extension) { described_class.new(test_configuration, client:) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
   let(:client) { instance_spy Milestoner::Tags::Publisher }
 
-  describe ".call" do
-    it "answers configuration" do
+  describe '.call' do
+    it 'answers configuration' do
       expect(described_class.call(configuration, client:)).to be_a(
-        Rubysmith::Configuration::Content
+        Rubysmith::Configuration::Content,
       )
     end
   end
 
-  describe "#call" do
+  describe '#call' do
     before { extension.call }
 
-    context "with default configuration" do
+    context 'with default configuration' do
       let(:test_configuration) { configuration.minimize }
 
-      it "messages client" do
+      it 'messages client' do
         expect(client).to have_received(:call).with(
           Milestoner::Configuration::Content[
-            documentation_format: "adoc",
+            documentation_format: 'adoc',
             prefixes: %w[Fixed Added Updated Removed Refactored],
-            version: "0.0.0"
-          ]
+            version: '0.0.0'
+          ],
         )
       end
     end
 
-    context "with custom configuration" do
+    context 'with custom configuration' do
       let :test_configuration do
-        configuration.merge extensions_milestoner_documentation_format: "adoc",
-                            extensions_milestoner_prefixes: %w[Added],
-                            project_version: "1.2.3"
+        configuration.merge(extensions_milestoner_documentation_format: 'adoc',
+          extensions_milestoner_prefixes: %w[Added],
+          project_version: '1.2.3')
       end
 
-      it "messages client" do
+      it 'messages client' do
         expect(client).to have_received(:call).with(
           Milestoner::Configuration::Content[
-            documentation_format: "adoc",
+            documentation_format: 'adoc',
             prefixes: %w[Added],
-            version: "1.2.3"
-          ]
+            version: '1.2.3'
+          ],
         )
       end
     end

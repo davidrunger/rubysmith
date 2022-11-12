@@ -34,18 +34,18 @@ module Rubysmith
           Extensions::Pragmater,
           Extensions::Tocer,
           Extensions::Rubocop,
-          Builders::Git::Commit
+          Builders::Git::Commit,
         ].freeze
 
-        def initialize builders: BUILDERS, **dependencies
+        def initialize(builders: BUILDERS, **dependencies)
           super(**dependencies)
           @builders = builders
         end
 
-        def call configuration
-          log_info "Building project skeleton: #{configuration.project_name}..."
-          builders.each { |builder| builder.call configuration }
-          log_info "Project skeleton complete!"
+        def call(configuration)
+          log_info("Building project skeleton: #{configuration.project_name}...")
+          builders.each { |builder| builder.call(configuration) }
+          log_info('Project skeleton complete!')
         end
 
         private
