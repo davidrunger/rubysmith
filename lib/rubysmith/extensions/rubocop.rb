@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "rubocop"
-require "refinements/ios"
+require 'rubocop'
+require 'refinements/ios'
 
 module Rubysmith
   module Extensions
@@ -11,13 +11,13 @@ module Rubysmith
 
       def self.call(...) = new(...).call
 
-      def initialize configuration, client: ::RuboCop::CLI.new
+      def initialize(configuration, client: ::RuboCop::CLI.new)
         @configuration = configuration
         @client = client
       end
 
       def call
-        STDOUT.squelch { client.run ["--autocorrect", configuration.project_root.to_s] }
+        STDOUT.squelch { client.run ['--autocorrect', configuration.project_root.to_s] }
         configuration
       end
 

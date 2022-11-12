@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "refinements/structs"
+require 'refinements/structs'
 
 module Rubysmith
   module Builders
@@ -10,7 +10,7 @@ module Rubysmith
 
       def self.call(...) = new(...).call
 
-      def initialize configuration, builder: Builder
+      def initialize(configuration, builder: Builder)
         @configuration = configuration
         @builder = builder
       end
@@ -18,11 +18,11 @@ module Rubysmith
       def call
         return configuration unless configuration.build_guard
 
-        builder.call(configuration.merge(template_path: "%project_name%/bin/guard.erb"))
-               .render
-               .permit 0o755
+        builder.call(configuration.merge(template_path: '%project_name%/bin/guard.erb')).
+          render.
+          permit(0o755)
 
-        builder.call(configuration.merge(template_path: "%project_name%/Guardfile.erb")).render
+        builder.call(configuration.merge(template_path: '%project_name%/Guardfile.erb')).render
         configuration
       end
 

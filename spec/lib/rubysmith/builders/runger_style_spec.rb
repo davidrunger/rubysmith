@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::RungerStyle do
   using Refinements::Pathnames
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:binstub_path) { temp_dir.join "test", "bin", "rubocop" }
-  let(:configuration_path) { temp_dir.join "test", ".rubocop.yml" }
+  let(:binstub_path) { temp_dir.join('test', 'bin', 'rubocop') }
+  let(:configuration_path) { temp_dir.join('test', '.rubocop.yml') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
-    context "when enabled" do
-      let(:test_configuration) { configuration.minimize.merge build_runger_style: true }
+  describe '#call' do
+    context 'when enabled' do
+      let(:test_configuration) { configuration.minimize.merge(build_runger_style: true) }
 
-      it "builds binstub" do
+      it 'builds binstub' do
         builder.call
 
         expect(binstub_path.read).to eq(<<~CONTENT)
@@ -31,12 +31,12 @@ RSpec.describe Rubysmith::Builders::RungerStyle do
         CONTENT
       end
 
-      it "updates file permissions" do
+      it 'updates file permissions' do
         builder.call
-        expect(binstub_path.stat.mode).to eq(33261)
+        expect(binstub_path.stat.mode).to eq(33_261)
       end
 
-      it "builds configuration" do
+      it 'builds configuration' do
         builder.call
 
         expect(configuration_path.read).to eq(<<~CONTENT)
@@ -47,7 +47,7 @@ RSpec.describe Rubysmith::Builders::RungerStyle do
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
       it "doesn't build binstub" do

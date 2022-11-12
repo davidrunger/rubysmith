@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "bundler"
-require "bundler/cli"
-require "refinements/pathnames"
+require 'bundler'
+require 'bundler/cli'
+require 'refinements/pathnames'
 
 module Rubysmith
   module Extensions
@@ -12,13 +12,13 @@ module Rubysmith
 
       def self.call(...) = new(...).call
 
-      def initialize configuration, client: ::Bundler::CLI
+      def initialize(configuration, client: ::Bundler::CLI)
         @configuration = configuration
         @client = client
       end
 
       def call
-        configuration.project_root.change_dir { client.start %w[install --quiet] }
+        configuration.project_root.change_dir { client.start(%w[install --quiet]) }
         configuration
       end
 

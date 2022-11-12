@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "tocer"
-require "refinements/structs"
+require 'tocer'
+require 'refinements/structs'
 
 module Rubysmith
   module Builders
@@ -12,7 +12,7 @@ module Rubysmith
 
         def self.call(...) = new(...).call
 
-        def initialize configuration, builder: Builder
+        def initialize(configuration, builder: Builder)
           @configuration = configuration
           @builder = builder
         end
@@ -20,10 +20,10 @@ module Rubysmith
         def call
           return configuration unless configuration.build_license
 
-          configuration.merge(template_path: "%project_name%/LICENSE-#{license}.#{kind}.erb")
-                       .then do |updated_configuration|
-                         builder.call(updated_configuration).render.rename "LICENSE.#{kind}"
-                       end
+          configuration.merge(template_path: "%project_name%/LICENSE-#{license}.#{kind}.erb").
+            then do |updated_configuration|
+            builder.call(updated_configuration).render.rename("LICENSE.#{kind}")
+          end
 
           configuration
         end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "refinements/structs"
+require 'refinements/structs'
 
 module Rubysmith
   module Configuration
@@ -9,7 +9,7 @@ module Rubysmith
       class CurrentTime
         using Refinements::Structs
 
-        def initialize now = Time.now
+        def initialize(now = Time.now)
           @now = now
         end
 

@@ -9,7 +9,7 @@ module Rubysmith
 
         def self.call(...) = new(...).call
 
-        def initialize configuration, builder: Builder, **dependencies
+        def initialize(configuration, builder: Builder, **dependencies)
           super(**dependencies)
 
           @configuration = configuration
@@ -19,12 +19,12 @@ module Rubysmith
         def call
           return configuration unless configuration.build_git
 
-          builder.call(configuration)
-                 .run("git add .", chdir: project_name)
-                 .run(
-                   %(git commit --all --message "Added project skeleton" --message "#{body}"),
-                   chdir: project_name
-                 )
+          builder.call(configuration).
+            run('git add .', chdir: project_name).
+            run(
+              %(git commit --all --message "Added project skeleton" --message "#{body}"),
+              chdir: project_name,
+            )
 
           configuration
         end

@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::Rake do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:rakefile_path) { temp_dir.join "test", "Rakefile" }
+  let(:rakefile_path) { temp_dir.join('test', 'Rakefile') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
+  describe '#call' do
     before { builder.call }
 
-    context "when enabled with default options" do
-      let(:test_configuration) { configuration.minimize.merge build_rake: true }
+    context 'when enabled with default options' do
+      let(:test_configuration) { configuration.minimize.merge(build_rake: true) }
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.read).to eq(<<~CONTENT)
           require "bundler/setup"
 
@@ -31,12 +31,12 @@ RSpec.describe Rubysmith::Builders::Rake do
       end
     end
 
-    context "when enabled with only Bundler Leak" do
+    context 'when enabled with only Bundler Leak' do
       let :test_configuration do
-        configuration.minimize.merge build_rake: true, build_bundler_leak: true
+        configuration.minimize.merge(build_rake: true, build_bundler_leak: true)
       end
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.read).to eq(<<~CONTENT)
           require "bundler/setup"
           require "bundler/plumber/task"
@@ -51,12 +51,12 @@ RSpec.describe Rubysmith::Builders::Rake do
       end
     end
 
-    context "when enabled with only Git and Git Lint" do
+    context 'when enabled with only Git and Git Lint' do
       let :test_configuration do
-        configuration.minimize.merge build_rake: true, build_git: true, build_git_lint: true
+        configuration.minimize.merge(build_rake: true, build_git: true, build_git_lint: true)
       end
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.read).to eq(<<~CONTENT)
           require "bundler/setup"
           require "git/lint/rake/setup"
@@ -69,10 +69,10 @@ RSpec.describe Rubysmith::Builders::Rake do
       end
     end
 
-    context "when enabled with only Reek" do
-      let(:test_configuration) { configuration.minimize.merge build_rake: true, build_reek: true }
+    context 'when enabled with only Reek' do
+      let(:test_configuration) { configuration.minimize.merge(build_rake: true, build_reek: true) }
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.read).to eq(<<~CONTENT)
           require "bundler/setup"
           require "reek/rake/task"
@@ -87,10 +87,10 @@ RSpec.describe Rubysmith::Builders::Rake do
       end
     end
 
-    context "when enabled with only RSpec" do
-      let(:test_configuration) { configuration.minimize.merge build_rake: true, build_rspec: true }
+    context 'when enabled with only RSpec' do
+      let(:test_configuration) { configuration.minimize.merge(build_rake: true, build_rspec: true) }
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.read).to eq(<<~CONTENT)
           require "bundler/setup"
           require "rspec/core/rake_task"
@@ -105,12 +105,12 @@ RSpec.describe Rubysmith::Builders::Rake do
       end
     end
 
-    context "when enabled with only RungerStyle" do
+    context 'when enabled with only RungerStyle' do
       let :test_configuration do
-        configuration.minimize.merge build_rake: true, build_runger_style: true
+        configuration.minimize.merge(build_rake: true, build_runger_style: true)
       end
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.read).to eq(<<~CONTENT)
           require "bundler/setup"
           require "rubocop/rake_task"
@@ -125,12 +125,12 @@ RSpec.describe Rubysmith::Builders::Rake do
       end
     end
 
-    context "when enabled with only YARD" do
+    context 'when enabled with only YARD' do
       let :test_configuration do
-        configuration.minimize.merge build_rake: true, build_yard: true
+        configuration.minimize.merge(build_rake: true, build_yard: true)
       end
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.read).to eq(<<~CONTENT)
           require "bundler/setup"
           require "yard"
@@ -147,7 +147,7 @@ RSpec.describe Rubysmith::Builders::Rake do
       end
     end
 
-    context "when enabled with all options" do
+    context 'when enabled with all options' do
       let(:test_configuration) { configuration.maximize }
 
       let :proof do
@@ -176,15 +176,15 @@ RSpec.describe Rubysmith::Builders::Rake do
         CONTENT
       end
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.read).to eq(proof)
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
-      it "builds Rakefile" do
+      it 'builds Rakefile' do
         expect(rakefile_path.exist?).to be(false)
       end
     end

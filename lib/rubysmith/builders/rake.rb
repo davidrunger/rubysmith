@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "refinements/structs"
+require 'refinements/structs'
 
 module Rubysmith
   module Builders
@@ -10,7 +10,7 @@ module Rubysmith
 
       def self.call(...) = new(...).call
 
-      def initialize configuration, builder: Builder
+      def initialize(configuration, builder: Builder)
         @configuration = configuration
         @builder = builder
       end
@@ -18,14 +18,14 @@ module Rubysmith
       def call
         return configuration unless configuration.build_rake
 
-        builder.call(configuration.merge(template_path: "%project_name%/Rakefile.erb"))
-               .render
-               .replace(/\[\s+/, "[")
-               .replace(/\s+\]/, "]")
-               .replace("  ", "")
-               .replace("task.", "  task.")
-               .replace(/\n+(?=require)/, "\n")
-               .replace(/\n{2,}/, "\n\n")
+        builder.call(configuration.merge(template_path: '%project_name%/Rakefile.erb')).
+          render.
+          replace(/\[\s+/, '[').
+          replace(/\s+\]/, ']').
+          replace('  ', '').
+          replace('task.', '  task.').
+          replace(/\n+(?=require)/, "\n").
+          replace(/\n{2,}/, "\n\n")
 
         configuration
       end

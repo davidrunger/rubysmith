@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "refinements/structs"
+require 'refinements/structs'
 
 module Rubysmith
   module Builders
@@ -11,7 +11,7 @@ module Rubysmith
 
         def self.call(...) = new(...).call
 
-        def initialize configuration, builder: Builder
+        def initialize(configuration, builder: Builder)
           @configuration = configuration
           @builder = builder
         end
@@ -19,11 +19,11 @@ module Rubysmith
         def call
           return configuration unless configuration.build_rspec
 
-          template = "%project_name%/spec/support/shared_contexts/temp_dir.rb.erb"
-          configuration.merge(template_path: template)
-                       .then { |updated_configuration| builder.call updated_configuration }
-                       .render
-                       .replace(/\n\s+\n\s+/, "\n  ")
+          template = '%project_name%/spec/support/shared_contexts/temp_dir.rb.erb'
+          configuration.merge(template_path: template).
+            then { |updated_configuration| builder.call(updated_configuration) }.
+            render.
+            replace(/\n\s+\n\s+/, "\n  ")
 
           configuration
         end

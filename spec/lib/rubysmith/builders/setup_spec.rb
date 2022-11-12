@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::Setup do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:build_path) { temp_dir.join "test", "bin", "setup" }
+  let(:build_path) { temp_dir.join('test', 'bin', 'setup') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
-    context "when enabled" do
-      let(:test_configuration) { configuration.minimize.merge build_setup: true }
+  describe '#call' do
+    context 'when enabled' do
+      let(:test_configuration) { configuration.minimize.merge(build_setup: true) }
 
-      it "builds setup script without Pry support" do
+      it 'builds setup script without Pry support' do
         builder.call
 
         expect(build_path.read).to eq(<<~CONTENT)
@@ -32,16 +32,16 @@ RSpec.describe Rubysmith::Builders::Setup do
         CONTENT
       end
 
-      it "updates script permissions" do
+      it 'updates script permissions' do
         builder.call
-        expect(build_path.stat.mode).to eq(33261)
+        expect(build_path.stat.mode).to eq(33_261)
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
-      it "does not build setup script" do
+      it 'does not build setup script' do
         builder.call
         expect(build_path.exist?).to be(false)
       end

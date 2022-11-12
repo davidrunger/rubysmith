@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::RSpec::Context do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:context_path) { temp_dir.join "test", "spec", "support", "shared_contexts", "temp_dir.rb" }
+  let(:context_path) { temp_dir.join('test', 'spec', 'support', 'shared_contexts', 'temp_dir.rb') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
+  describe '#call' do
     before { builder.call }
 
-    context "when enabled with refinements" do
+    context 'when enabled with refinements' do
       let :test_configuration do
-        configuration.minimize.merge build_rspec: true, build_refinements: true
+        configuration.minimize.merge(build_rspec: true, build_refinements: true)
       end
 
       let :content do
@@ -37,13 +37,13 @@ RSpec.describe Rubysmith::Builders::RSpec::Context do
         CONTENT
       end
 
-      it "builds temporary directory shared context" do
+      it 'builds temporary directory shared context' do
         expect(context_path.read).to eq(content)
       end
     end
 
-    context "when enabled without refinements" do
-      let(:test_configuration) { configuration.minimize.merge build_rspec: true }
+    context 'when enabled without refinements' do
+      let(:test_configuration) { configuration.minimize.merge(build_rspec: true) }
 
       let :content do
         <<~CONTENT
@@ -59,12 +59,12 @@ RSpec.describe Rubysmith::Builders::RSpec::Context do
         CONTENT
       end
 
-      it "builds temporary directory shared context" do
+      it 'builds temporary directory shared context' do
         expect(context_path.read).to eq(content)
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
       it "doesn't build temporary directory shared context" do

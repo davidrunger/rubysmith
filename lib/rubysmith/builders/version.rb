@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "refinements/structs"
+require 'refinements/structs'
 
 module Rubysmith
   module Builders
@@ -10,15 +10,15 @@ module Rubysmith
 
       def self.call(...) = new(...).call
 
-      def initialize configuration, builder: Builder
+      def initialize(configuration, builder: Builder)
         @configuration = configuration
         @builder = builder
       end
 
       def call
-        builder.call(configuration.merge(template_path: "%project_name%/.ruby-version.erb"))
-               .render
-               .append("\n")
+        builder.call(configuration.merge(template_path: '%project_name%/.ruby-version.erb')).
+          render.
+          append("\n")
         configuration
       end
 

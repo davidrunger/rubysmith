@@ -1,3 +1,6 @@
 inherit_gem:
   runger_style:
     - rulesets/default.yml
+
+Style/ClassAndModuleChildren:
+  Enabled: false

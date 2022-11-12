@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::CircleCI do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:build_path) { temp_dir.join "test/.circleci/config.yml" }
+  let(:build_path) { temp_dir.join('test/.circleci/config.yml') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
-    context "when enabled" do
-      let(:test_configuration) { configuration.minimize.merge build_circle_ci: true }
+  describe '#call' do
+    context 'when enabled' do
+      let(:test_configuration) { configuration.minimize.merge(build_circle_ci: true) }
 
-      it "builds configuration" do
+      it 'builds configuration' do
         builder.call
 
         expect(build_path.read).to eq(<<~CONTENT)
@@ -56,12 +56,12 @@ RSpec.describe Rubysmith::Builders::CircleCI do
       end
     end
 
-    context "when enabled with SimpleCov" do
+    context 'when enabled with SimpleCov' do
       let :test_configuration do
-        configuration.minimize.merge build_circle_ci: true, build_simple_cov: true
+        configuration.minimize.merge(build_circle_ci: true, build_simple_cov: true)
       end
 
-      it "builds configuration" do
+      it 'builds configuration' do
         builder.call
 
         expect(build_path.read).to eq(<<~CONTENT)
@@ -105,10 +105,10 @@ RSpec.describe Rubysmith::Builders::CircleCI do
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
-      it "does not build configuration" do
+      it 'does not build configuration' do
         builder.call
         expect(build_path.exist?).to be(false)
       end

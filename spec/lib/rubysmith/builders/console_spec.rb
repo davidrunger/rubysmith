@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::Console do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:build_path) { temp_dir.join "test/bin/console" }
+  let(:build_path) { temp_dir.join('test/bin/console') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
-    context "when enabled with non-dashed project name" do
-      let(:test_configuration) { configuration.minimize.merge build_console: true }
+  describe '#call' do
+    context 'when enabled with non-dashed project name' do
+      let(:test_configuration) { configuration.minimize.merge(build_console: true) }
 
-      it "builds console script" do
+      it 'builds console script' do
         builder.call
 
         expect(build_path.read).to eq(<<~CONTENT)
@@ -33,20 +33,20 @@ RSpec.describe Rubysmith::Builders::Console do
         CONTENT
       end
 
-      it "updates file permissions" do
+      it 'updates file permissions' do
         builder.call
-        expect(build_path.stat.mode).to eq(33261)
+        expect(build_path.stat.mode).to eq(33_261)
       end
     end
 
-    context "when enabled with dashed project name" do
+    context 'when enabled with dashed project name' do
       let :test_configuration do
-        configuration.minimize.merge project_name: "demo-test", build_console: true
+        configuration.minimize.merge(project_name: 'demo-test', build_console: true)
       end
 
-      let(:build_path) { temp_dir.join "demo-test/bin/console" }
+      let(:build_path) { temp_dir.join('demo-test/bin/console') }
 
-      it "builds console script" do
+      it 'builds console script' do
         builder.call
 
         expect(build_path.read).to eq(<<~CONTENT)
@@ -62,16 +62,16 @@ RSpec.describe Rubysmith::Builders::Console do
         CONTENT
       end
 
-      it "updates file permissions" do
+      it 'updates file permissions' do
         builder.call
-        expect(build_path.stat.mode).to eq(33261)
+        expect(build_path.stat.mode).to eq(33_261)
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
-      it "does not build console script" do
+      it 'does not build console script' do
         builder.call
         expect(build_path.exist?).to be(false)
       end

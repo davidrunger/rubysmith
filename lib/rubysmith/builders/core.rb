@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "refinements/strings"
-require "refinements/structs"
+require 'refinements/strings'
+require 'refinements/structs'
 
 module Rubysmith
   module Builders
@@ -12,26 +12,26 @@ module Rubysmith
 
       def self.call(...) = new(...).call
 
-      def initialize configuration, builder: Builder
+      def initialize(configuration, builder: Builder)
         @configuration = configuration
         @builder = builder
       end
 
       def call
-        builder.call(configuration.merge(template_path: "%project_name%/lib/%project_path%.rb.erb"))
-               .render
-               .replace("  require", "require")
-               .replace(/    (?=(Zeit|loader|end))/, "")
-               .replace("\n  \n", "\n\n")
-               .insert_before("module #{module_name}", "#{indentation}# Main namespace.\n")
-               .replace("end\n  end", "    end\n  end")
+        builder.call(configuration.merge(template_path: '%project_name%/lib/%project_path%.rb.erb')).
+          render.
+          replace('  require', 'require').
+          replace(/    (?=(Zeit|loader|end))/, '').
+          replace("\n  \n", "\n\n").
+          insert_before("module #{module_name}", "#{indentation}# Main namespace.\n").
+          replace("end\n  end", "    end\n  end")
 
         configuration
       end
 
       private
 
-      def indentation = "".indent configuration.project_levels
+      def indentation = ''.indent(configuration.project_levels)
 
       def module_name = configuration.project_class
 

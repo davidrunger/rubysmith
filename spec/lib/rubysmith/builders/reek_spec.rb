@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Builders::Reek do
   using Refinements::Structs
 
-  subject(:builder) { described_class.new test_configuration }
+  subject(:builder) { described_class.new(test_configuration) }
 
-  include_context "with application dependencies"
+  include_context 'with application dependencies'
 
-  let(:configuration_path) { temp_dir.join "test", ".reek.yml" }
+  let(:configuration_path) { temp_dir.join('test', '.reek.yml') }
 
-  it_behaves_like "a builder"
+  it_behaves_like 'a builder'
 
-  describe "#call" do
+  describe '#call' do
     before { builder.call }
 
-    context "when enabled" do
-      let(:test_configuration) { configuration.minimize.merge build_reek: true }
+    context 'when enabled' do
+      let(:test_configuration) { configuration.minimize.merge(build_reek: true) }
 
-      it "builds configuration" do
+      it 'builds configuration' do
         expect(configuration_path.read).to eq(<<~CONTENT)
           exclude_paths:
             - tmp
@@ -28,7 +28,7 @@ RSpec.describe Rubysmith::Builders::Reek do
       end
     end
 
-    context "when disabled" do
+    context 'when disabled' do
       let(:test_configuration) { configuration.minimize }
 
       it "doesn't build configuration" do

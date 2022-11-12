@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Rubysmith::Configuration::Loader do
   subject(:loader) { described_class.with_defaults }
@@ -37,63 +37,63 @@ RSpec.describe Rubysmith::Configuration::Loader do
       build_versions: true,
       build_yard: false,
       build_zeitwerk: true,
-      citation_message: "Please use the following metadata when citing this project in your work.",
-      documentation_format: "adoc",
-      extensions_milestoner_documentation_format: "adoc",
+      citation_message: 'Please use the following metadata when citing this project in your work.',
+      documentation_format: 'adoc',
+      extensions_milestoner_documentation_format: 'adoc',
       extensions_milestoner_prefixes: %w[Fixed Added Updated Removed Refactored],
-      extensions_pragmater_comments: ["# frozen_string_literal: true"],
+      extensions_pragmater_comments: ['# frozen_string_literal: true'],
       extensions_pragmater_includes: [
-        "**/*.rake",
-        "**/*.rb",
-        "*.gemspec",
-        "exe/*",
-        "bin/console",
-        "bin/guard",
-        "bin/rubocop",
-        "config.ru",
-        "Gemfile",
-        "Guardfile",
-        "Rakefile"
+        '**/*.rake',
+        '**/*.rb',
+        '*.gemspec',
+        'exe/*',
+        'bin/console',
+        'bin/guard',
+        'bin/rubocop',
+        'config.ru',
+        'Gemfile',
+        'Guardfile',
+        'Rakefile',
       ],
       extensions_tocer_includes: [
-        "README.md"
+        'README.md',
       ],
-      extensions_tocer_label: "## Table of Contents",
-      license_label: "Hippocratic",
-      license_name: "hippocratic",
+      extensions_tocer_label: '## Table of Contents',
+      license_label: 'Hippocratic',
+      license_name: 'hippocratic',
       license_version: 2.1,
-      project_version: "0.0.0"
+      project_version: '0.0.0'
     ]
   end
 
-  describe ".call" do
-    it "answers default configuration" do
+  describe '.call' do
+    it 'answers default configuration' do
       expect(described_class.call).to be_a(Rubysmith::Configuration::Content)
     end
   end
 
-  describe ".with_defaults" do
-    it "answers default configuration" do
+  describe '.with_defaults' do
+    it 'answers default configuration' do
       expect(described_class.with_defaults.call).to eq(content)
     end
   end
 
-  describe "#call" do
-    it "answers default configuration" do
+  describe '#call' do
+    it 'answers default configuration' do
       expect(loader.call).to eq(content)
     end
 
-    it "answers enhanced configuration" do
+    it 'answers enhanced configuration' do
       now = Time.now
 
-      loader = described_class.new enhancers: [
-        Rubysmith::Configuration::Enhancers::CurrentTime.new(now)
-      ]
+      loader = described_class.new(enhancers: [
+        Rubysmith::Configuration::Enhancers::CurrentTime.new(now),
+      ])
 
       expect(loader.call).to have_attributes(now:)
     end
 
-    it "answers frozen configuration" do
+    it 'answers frozen configuration' do
       expect(loader.call).to be_frozen
     end
   end
