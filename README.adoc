@@ -1,352 +1,415 @@
-:gemsmith_link: link:https://www.alchemists.io/projects/gemsmith[Gemsmith]
-
-:toc: macro
-:toclevels: 5
-:figure-caption!:
-
-= Rubysmith
-
 Rubysmith is a command line interface for smithing Ruby projects.
 
-This gem is useful in situations in which you need something more sophisticated than a
-link:https://bundler.io/guides/bundler_in_a_single_file_ruby_script.html[Bundler Inline] script but
-less than a {gemsmith_link} gem. Rubysmith is the foundation of Gemsmith and provides much of the
-same functionality as Gemsmith but is solely tailored for pure Ruby projects. Again, this is a great
-tool for spiking quick Ruby implementations, sharing code snippets with others, or building full
-blown Ruby projects for collaboration with others.
+This gem is useful in situations in which you need something more
+sophisticated than a [Bundler
+Inline](https://bundler.io/guides/bundler_in_a_single_file_ruby_script.html)
+script but less than a
+[Gemsmith](https://www.alchemists.io/projects/gemsmith) gem. Rubysmith
+is the foundation of Gemsmith and provides much of the same
+functionality as Gemsmith but is solely tailored for pure Ruby projects.
+Again, this is a great tool for spiking quick Ruby implementations,
+sharing code snippets with others, or building full blown Ruby projects
+for collaboration with others.
 
-toc::[]
+Features {#_features}
+========
 
-== Features
+-   Builds a Ruby project skeleton for custom design and development.
 
-* Builds a Ruby project skeleton for custom design and development.
-* Uses link:https://www.alchemists.io/projects/runcom[Runcom] for resource configuration management.
-* Uses link:https://www.alchemists.io/projects/pragmater[Pragmater] for Ruby source pragma directives.
-* Supports link:https://github.com/amazing-print/amazing_print[Amazing Print].
-* Supports link:https://github.com/rubymem/bundler-leak[Bundler Leak].
-* Supports link:https://github.com/davidrunger/runger_style/[RungerStyle].
-* Supports link:https://circleci.com[Circle CI].
-* Supports link:https://orcid.org[Citations (ORCID)].
-* Supports console script for local development.
-* Supports link:https://github.com/ruby/debug[Debug].
-* Supports link:https://git-scm.com[Git].
-* Supports link:https://github.com[GitHub].
-* Supports link:https://www.alchemists.io/projects/git-lint[Git Lint].
-* Supports link:https://github.com/guard/guard[Guard].
-* Supports link:https://github.com/ruby/rake[Rake].
-* Supports link:https://github.com/troessner/reek[Reek].
-* Supports link:https://www.alchemists.io/projects/refinements[Refinements].
-* Supports link:https://rspec.info[RSpec].
-* Supports setup script for project setup.
-* Supports link:https://github.com/simplecov-ruby/simplecov[SimpleCov].
-* Supports link:https://yardoc.org[YARD].
-* Supports link:https://github.com/fxn/zeitwerk[Zeitwerk].
-* Supports common settings and a structured layout for building projects.
-* Provides common documentation:
-** README
-** LICENSE
-** VERSIONS
-** Security
-** Code of Conduct
-** Contributions
-** Communities
+-   Uses [Runcom](https://www.alchemists.io/projects/runcom) for
+    resource configuration management.
 
-== Requirements
+-   Uses [Pragmater](https://www.alchemists.io/projects/pragmater) for
+    Ruby source pragma directives.
 
-. A UNIX-based system.
-. link:https://www.ruby-lang.org[Ruby].
+-   Supports [Amazing
+    Print](https://github.com/amazing-print/amazing_print).
 
-== Setup
+-   Supports [Bundler Leak](https://github.com/rubymem/bundler-leak).
+
+-   Supports
+    [RungerStyle](https://github.com/davidrunger/runger_style/).
+
+-   Supports [Circle CI](https://circleci.com).
+
+-   Supports [Citations (ORCID)](https://orcid.org).
+
+-   Supports console script for local development.
+
+-   Supports [Debug](https://github.com/ruby/debug).
+
+-   Supports [Git](https://git-scm.com).
+
+-   Supports [GitHub](https://github.com).
+
+-   Supports [Git Lint](https://www.alchemists.io/projects/git-lint).
+
+-   Supports [Guard](https://github.com/guard/guard).
+
+-   Supports [Rake](https://github.com/ruby/rake).
+
+-   Supports [Reek](https://github.com/troessner/reek).
+
+-   Supports
+    [Refinements](https://www.alchemists.io/projects/refinements).
+
+-   Supports [RSpec](https://rspec.info).
+
+-   Supports setup script for project setup.
+
+-   Supports [SimpleCov](https://github.com/simplecov-ruby/simplecov).
+
+-   Supports [YARD](https://yardoc.org).
+
+-   Supports [Zeitwerk](https://github.com/fxn/zeitwerk).
+
+-   Supports common settings and a structured layout for building
+    projects.
+
+-   Provides common documentation:
+
+    -   README
+
+    -   LICENSE
+
+    -   VERSIONS
+
+    -   Security
+
+    -   Code of Conduct
+
+    -   Contributions
+
+    -   Communities
+
+Requirements {#_requirements}
+============
+
+1.  A UNIX-based system.
+
+2.  [Ruby](https://www.ruby-lang.org).
+
+Setup {#_setup}
+=====
 
 The easiest way to install this version of `rubysmith` is via the
-link:https://github.com/rdp/specific_install[`specific_install`] gem, which will pull and build the
-`rubysmith` gem directly from the `master` branch of this repo:
+[`specific_install`](https://github.com/rdp/specific_install) gem, which
+will pull and build the `rubysmith` gem directly from the `master`
+branch of this repo:
 
-[source,bash]
+```` {.bash}
 ```
 gem install specific_install
 gem specific_install davidrunger/rubysmith
 ```
+````
 
-== Usage
+Usage {#_usage}
+=====
 
-=== Command Line Interface (CLI)
+Command Line Interface (CLI) {#_command_line_interface_cli}
+----------------------------
 
 From the command line, type: `rubysmith --help`
 
-....
-USAGE:
-  -b, --build NAME [options]               Build new project.
-  -c, --config ACTION                      Manage gem configuration: edit or view.
-  -h, --help                               Show this message.
-  -p, --publish VERSION                    Publish project.
-  -v, --version                            Show gem version.
+    USAGE:
+      -b, --build NAME [options]               Build new project.
+      -c, --config ACTION                      Manage gem configuration: edit or view.
+      -h, --help                               Show this message.
+      -p, --publish VERSION                    Publish project.
+      -v, --version                            Show gem version.
 
-BUILD OPTIONS:
-      --[no-]amazing_print                 Add Amazing Print gem. Default: true.
-      --[no-]bundler-leak                  Add Bundler Leak gem. Default: true.
-      --[no-]runger_style                  Add RungerStyle gem. Default: true.
-      --[no-]circle_ci                     Add Circle CI configuration and badge. Default: false.
-      --[no-]citation                      Add citation documentation. Default: true.
-      --[no-]community                     Add community documentation. Default: false.
-      --[no-]conduct                       Add code of conduct documentation. Default: true.
-      --[no-]console                       Add console script. Default: true.
-      --[no-]contributions                 Add contributions documentation. Default: true.
-      --[no-]debug                         Add Debug gem. Default: true.
-      --[no-]funding                       Add GitHub funding configuration. Default: false.
-      --[no-]git                           Add Git. Default: true.
-      --[no-]git_hub                       Add GitHub templates. Default: false.
-      --[no-]git-lint                      Add Git Lint gem. Default: true.
-      --[no-]guard                         Add Guard gem. Default: true.
-      --[no-]license                       Add license documentation. Default: true.
-      --max                                Use maximum/enabled options. Default: false.
-      --min                                Use minimum/disabled options. Default: false.
-      --[no-]rake                          Add Rake gem. Default: true.
-      --[no-]readme                        Add readme documentation. Default: true.
-      --[no-]reek                          Add Reek gem. Default: true.
-      --[no-]refinements                   Add Refinements gem. Default: true.
-      --[no-]rspec                         Add RSpec gem. Default: true.
-      --[no-]security                      Add security. Default: true.
-      --[no-]setup                         Add setup script. Default: true.
-      --[no-]simple_cov                    Add SimpleCov gem. Default: true.
-      --[no-]versions                      Add version history. Default: true.
-      --[no-]yard                          Add Yard gem. Default: false.
-      --[no-]zeitwerk                      Add Zeitwerk gem. Default: true.
-....
+    BUILD OPTIONS:
+          --[no-]amazing_print                 Add Amazing Print gem. Default: true.
+          --[no-]bundler-leak                  Add Bundler Leak gem. Default: true.
+          --[no-]runger_style                  Add RungerStyle gem. Default: true.
+          --[no-]circle_ci                     Add Circle CI configuration and badge. Default: false.
+          --[no-]citation                      Add citation documentation. Default: true.
+          --[no-]community                     Add community documentation. Default: false.
+          --[no-]conduct                       Add code of conduct documentation. Default: true.
+          --[no-]console                       Add console script. Default: true.
+          --[no-]contributions                 Add contributions documentation. Default: true.
+          --[no-]debug                         Add Debug gem. Default: true.
+          --[no-]funding                       Add GitHub funding configuration. Default: false.
+          --[no-]git                           Add Git. Default: true.
+          --[no-]git_hub                       Add GitHub templates. Default: false.
+          --[no-]git-lint                      Add Git Lint gem. Default: true.
+          --[no-]guard                         Add Guard gem. Default: true.
+          --[no-]license                       Add license documentation. Default: true.
+          --max                                Use maximum/enabled options. Default: false.
+          --min                                Use minimum/disabled options. Default: false.
+          --[no-]rake                          Add Rake gem. Default: true.
+          --[no-]readme                        Add readme documentation. Default: true.
+          --[no-]reek                          Add Reek gem. Default: true.
+          --[no-]refinements                   Add Refinements gem. Default: true.
+          --[no-]rspec                         Add RSpec gem. Default: true.
+          --[no-]security                      Add security. Default: true.
+          --[no-]setup                         Add setup script. Default: true.
+          --[no-]simple_cov                    Add SimpleCov gem. Default: true.
+          --[no-]versions                      Add version history. Default: true.
+          --[no-]yard                          Add Yard gem. Default: false.
+          --[no-]zeitwerk                      Add Zeitwerk gem. Default: true.
 
-==== Build
+### Build {#_build}
 
-The core functionality of this gem centers around the `--build` command and associated options
-(flags). The build options allow you to further customize the kind of project you want to build.
-Most build options are enabled by default. Example:
+The core functionality of this gem centers around the `--build` command
+and associated options (flags). The build options allow you to further
+customize the kind of project you want to build. Most build options are
+enabled by default. Example:
 
-[source,bash]
-----
+``` {.bash}
 rubysmith --build demo
-----
+```
 
-Running the above will generate a new `demo` Ruby project. Should you wish to disable specific
-options, you can use `--no-*` prefixes. Example:
+Running the above will generate a new `demo` Ruby project. Should you
+wish to disable specific options, you can use `--no-*` prefixes.
+Example:
 
-[source,bash]
-----
+``` {.bash}
 rubysmith --build demo --no-debug --no-guard
-----
+```
 
-With the above example, both Debug and Guard support would have been disabled when building the
-`demo` project. Taking this a step further, you can also use the `--min` option to generate a
-project with bare minimum of options. Example:
+With the above example, both Debug and Guard support would have been
+disabled when building the `demo` project. Taking this a step further,
+you can also use the `--min` option to generate a project with bare
+minimum of options. Example:
 
-[source,bash]
-----
+``` {.bash}
 rubysmith --build demo --min
-----
+```
 
-The above is essentially the same as building with _all_ options disabled. This is handy in
-situations where you need to quickly script something up for sharing with others yet still want to
-avoid using a Bundler Inline script so gem dependencies are not installed each time the code is run.
+The above is essentially the same as building with *all* options
+disabled. This is handy in situations where you need to quickly script
+something up for sharing with others yet still want to avoid using a
+Bundler Inline script so gem dependencies are not installed each time
+the code is run.
 
-As shown earlier, you can combine options but be aware that order matters. Take the following, for
-example, where both minimum and maximum options are used in conjunction with other options:
+As shown earlier, you can combine options but be aware that order
+matters. Take the following, for example, where both minimum and maximum
+options are used in conjunction with other options:
 
-[source,bash]
-----
+``` {.bash}
 rubysmith --build demo --min --zeitwerk
 rubysmith --build demo --max --no-debug
-----
+```
 
-With the above examples, the first line will _disable_ all options except Zeitwerk while the second
-line will _enable_ all options except Debug. This can be a handy way to build a new project with all
-options either disabled or enabled with only a few select options modified. To have specific options
-enabled/disabled _every time_ you build a new Ruby project, you can edit your global configuration
-for making these settings permanent (see below for details).
+With the above examples, the first line will *disable* all options
+except Zeitwerk while the second line will *enable* all options except
+Debug. This can be a handy way to build a new project with all options
+either disabled or enabled with only a few select options modified. To
+have specific options enabled/disabled *every time* you build a new Ruby
+project, you can edit your global configuration for making these
+settings permanent (see below for details).
 
-There is a lot of flexibility when building a new project through the various build options. I'll
-walk you through each so you can better understand why you'd want to enable or disable any one of
-them.
+There is a lot of flexibility when building a new project through the
+various build options. I'll walk you through each so you can better
+understand why you'd want to enable or disable any one of them.
 
-===== Amazing Print
+#### Amazing Print {#_amazing_print}
 
 The `--amazing_print` option allows you to build your project with the
-link:https://github.com/amazing-print/amazing_print[Amazing Print] gem for debugging purposes and is
-a handy debugging tool when inspecting your Ruby objects and printing details in a quick to read
-format.
+[Amazing Print](https://github.com/amazing-print/amazing_print) gem for
+debugging purposes and is a handy debugging tool when inspecting your
+Ruby objects and printing details in a quick to read format.
 
-===== Bundler Leak
+#### Bundler Leak {#_bundler_leak}
 
 The `--bundler-leak` option allows you to build your project with the
-link:https://github.com/rubymem/bundler-leak[Bundler Leak] gem which helps detect memory leaks in
-your gem dependencies.
+[Bundler Leak](https://github.com/rubymem/bundler-leak) gem which helps
+detect memory leaks in your gem dependencies.
 
-===== RungerStyle
+#### RungerStyle {#_rungerstyle}
 
 The `--runger_style` option allows you to build your project with the
-link:https://github.com/davidrunger/runger_style/[RungerStyle] gem so you have an immediate working
--- and high quality -- link:https://docs.rubocop.org/rubocop[RuboCop] configuration. Read the
-RungerStyle documentation for further customization.
+[RungerStyle](https://github.com/davidrunger/runger_style/) gem so you
+have an immediate working --- and high
+quality --- [RuboCop](https://docs.rubocop.org/rubocop) configuration.
+Read the RungerStyle documentation for further customization.
 
-===== Circle CI
+#### Circle CI {#_circle_ci}
 
-The `--circle_ci` option allows you to build your project with link:https://circleci.com[Circle CI]
-configured so you can get your project building as quickly as possible.
+The `--circle_ci` option allows you to build your project with [Circle
+CI](https://circleci.com) configured so you can get your project
+building as quickly as possible.
 
-===== Citation
+#### Citation {#_citation}
 
-The `--citation` option allows you to add a link:https://citation-file-format.github.io[citation]
-file to your project so you can help the research community cite your work in their studies if your
-project is used.
+The `--citation` option allows you to add a
+[citation](https://citation-file-format.github.io) file to your project
+so you can help the research community cite your work in their studies
+if your project is used.
 
-===== Community
+#### Community {#_community}
 
-The `--community` option allows you to link to your open source community, organization, or group
-chat to help with community engagement of your work.
+The `--community` option allows you to link to your open source
+community, organization, or group chat to help with community engagement
+of your work.
 
-===== Code of Conduct
+#### Code of Conduct {#_code_of_conduct}
 
-The `--conduct` option allows you to link to your link:https://www.contributor-covenant.org[Code of
-Conduct] to encourage good community participation. Regardless of whether you have a community or
+The `--conduct` option allows you to link to your [Code of
+Conduct](https://www.contributor-covenant.org) to encourage good
+community participation. Regardless of whether you have a community or
 not, the code of conduct is good to encourage in general.
 
-===== Console
+#### Console {#_console}
 
-The `--console` option allows you to add a `console` script for local development. So instead of
-typing `irb`, you can type `bin/console` and get an IRB session with all of your project's code
-loaded.
+The `--console` option allows you to add a `console` script for local
+development. So instead of typing `irb`, you can type `bin/console` and
+get an IRB session with all of your project's code loaded.
 
-===== Contributions
+#### Contributions {#_contributions}
 
-The `--contributions` option allows you to link to contributing documentation so people know to
-contribute back to your work.
+The `--contributions` option allows you to link to contributing
+documentation so people know to contribute back to your work.
 
-===== Debug
+#### Debug {#_debug}
 
-The `--debug` option allows you add the link:https://github.com/ruby/debug[Debug] gem to your
-project for debugging your code by setting breakpoints, remotely connecting to running code, and
-much more.
+The `--debug` option allows you add the
+[Debug](https://github.com/ruby/debug) gem to your project for debugging
+your code by setting breakpoints, remotely connecting to running code,
+and much more.
 
-===== Funding
+#### Funding {#_funding}
 
-The `--funding` option allows you add a link:https://github.com[GitHub] funding configuration to
-your project so you can attract link:https://docs.github.com/en/sponsors[sponsors]. This option
-doesn't require use of the `--git_hub` option but is encouraged.
+The `--funding` option allows you add a [GitHub](https://github.com)
+funding configuration to your project so you can attract
+[sponsors](https://docs.github.com/en/sponsors). This option doesn't
+require use of the `--git_hub` option but is encouraged.
 
-===== Git
+#### Git {#_git}
 
-The `--git` option allows you add link:https://git-scm.com[Git] repository support.
+The `--git` option allows you add [Git](https://git-scm.com) repository
+support.
 
-===== GitHub
+#### GitHub {#_github}
 
-The `--git_hub` option allows you add link:https://github.com[GitHub] templates to your project for
-issues and pull requests.
+The `--git_hub` option allows you add [GitHub](https://github.com)
+templates to your project for issues and pull requests.
 
-===== Git Lint
+#### Git Lint {#_git_lint}
 
-The `--git-lint` option allows you to add the link:https://www.alchemists.io/projects/git-lint[Git
-Lint] gem to your project to ensure you are crafting your Git commits in a consistent and readable
+The `--git-lint` option allows you to add the [Git
+Lint](https://www.alchemists.io/projects/git-lint) gem to your project
+to ensure you are crafting your Git commits in a consistent and readable
 manner.
 
-===== Guard
+#### Guard {#_guard}
 
-The `--guard` option allows you add the link:https://github.com/guard/guard[Guard] gem to your
-project for rapid red, green, refactor development cycles.
+The `--guard` option allows you add the
+[Guard](https://github.com/guard/guard) gem to your project for rapid
+red, green, refactor development cycles.
 
-===== License
+#### License {#_license}
 
 The `--license` option ensures you build your project with a license.
 
-===== Maximum
+#### Maximum {#_maximum}
 
-The `--max` option allows you to build your project with _all_ options _enabled_. This is a quick way
-to build a new project with all options enabled without having to pick and choose.
+The `--max` option allows you to build your project with *all* options
+*enabled*. This is a quick way to build a new project with all options
+enabled without having to pick and choose.
 
-===== Minimum
+#### Minimum {#_minimum}
 
-The `--min` option allows you to build your project with _all_ options _disabled_. This is a quick
-way to build a new project with the bare minimum of support which is a one step above reaching for a
-Bundler Inline script.
+The `--min` option allows you to build your project with *all* options
+*disabled*. This is a quick way to build a new project with the bare
+minimum of support which is a one step above reaching for a Bundler
+Inline script.
 
-===== Rake
+#### Rake {#_rake}
 
-The `--rake` option allows you to add the link:https://github.com/ruby/rake[Rake] gem for quickly
-crafting build scripts.
+The `--rake` option allows you to add the
+[Rake](https://github.com/ruby/rake) gem for quickly crafting build
+scripts.
 
-===== Readme
+#### Readme {#_readme}
 
-The `--readme` option allows you to add README documentation to your project.
+The `--readme` option allows you to add README documentation to your
+project.
 
-===== Reek
+#### Reek {#_reek}
 
-The `--reek` option allows you add the link:https://github.com/troessner/reek[Reek] gem to your
-project for code smell and code quality support.
+The `--reek` option allows you add the
+[Reek](https://github.com/troessner/reek) gem to your project for code
+smell and code quality support.
 
-===== Refinements
+#### Refinements {#_refinements}
 
 The `--refinements` option allows you to add the
-link:https://www.alchemists.io/projects/refinements[Refinements] gem to your project which enhances
-Ruby core objects without monkey patching your code.
+[Refinements](https://www.alchemists.io/projects/refinements) gem to
+your project which enhances Ruby core objects without monkey patching
+your code.
 
-===== RSpec
+#### RSpec {#_rspec}
 
-The `--rspec` option allows you add the link:https://rspec.info[RSpec] gem to your project for
-defining your project specifications and have a framework for testing your code.
+The `--rspec` option allows you add the [RSpec](https://rspec.info) gem
+to your project for defining your project specifications and have a
+framework for testing your code.
 
-===== Setup
+#### Setup {#_setup_2}
 
-The `--setup` option allows you to configure you project with automated setup instructions so anyone
-new to your project can quickly get started by running the `bin/setup` script.
+The `--setup` option allows you to configure you project with automated
+setup instructions so anyone new to your project can quickly get started
+by running the `bin/setup` script.
 
-===== SimpleCov
+#### SimpleCov {#_simplecov}
 
 The `--simple_cov` option allows you add the
-link:https://github.com/simplecov-ruby/simplecov[SimpleCov] gem to your project to provide full
-analysis of what your quality of code is for the project.
+[SimpleCov](https://github.com/simplecov-ruby/simplecov) gem to your
+project to provide full analysis of what your quality of code is for the
+project.
 
-===== Versions
+#### Versions {#_versions}
 
-The `--versions` option allows you add a `VERSIONS` file to your project to provide details about
-all published versions of your project.
+The `--versions` option allows you add a `VERSIONS` file to your project
+to provide details about all published versions of your project.
 
-===== YARD
+#### YARD {#_yard}
 
-The `--yard` option allows you add the link:https://yardoc.org/[YARD] gem to your project so you can
-automate the generation of project documentation. Once your project is built, you can use `rake
-yard` to build documentation into the `doc/yard` folder. This folder is ignored by Git by default.
-Additional customization is possible via the YARD Rake task as found in the `Rakefile`.
+The `--yard` option allows you add the [YARD](https://yardoc.org/) gem
+to your project so you can automate the generation of project
+documentation. Once your project is built, you can use `rake
+yard` to build documentation into the `doc/yard` folder. This folder is
+ignored by Git by default. Additional customization is possible via the
+YARD Rake task as found in the `Rakefile`.
 
-===== Zeitwerk
+#### Zeitwerk {#_zeitwerk}
 
-The `--zeitwerk` option allows you add the link:https://github.com/fxn/zeitwerk[Zeitwerk] gem to
-your project so you can reduce the maintence burden of managing requirements when adding new objects
-to your project.
+The `--zeitwerk` option allows you add the
+[Zeitwerk](https://github.com/fxn/zeitwerk) gem to your project so you
+can reduce the maintence burden of managing requirements when adding new
+objects to your project.
 
-==== Publish
+### Publish {#_publish}
 
-Rubysmith can be used to publish your Ruby projects. This is done via the `--publish` command. If,
-for example, you want to publish `0.1.0` of your `demo` project you could do that as follows:
+Rubysmith can be used to publish your Ruby projects. This is done via
+the `--publish` command. If, for example, you want to publish `0.1.0` of
+your `demo` project you could do that as follows:
 
-[source,bash]
-----
+``` {.bash}
 cd demo
 rubysmith --publish 0.1.0
-----
+```
 
-This will publish (tag) your `demo` project as `0.1.0` both locally and on your remote Git repository.
-Rubysmith uses link:https://www.alchemists.io/projects/milestoner[Milestoner] to handle publishing
-of your project for you. You can use either but the convenience is built in for you.
+This will publish (tag) your `demo` project as `0.1.0` both locally and
+on your remote Git repository. Rubysmith uses
+[Milestoner](https://www.alchemists.io/projects/milestoner) to handle
+publishing of your project for you. You can use either but the
+convenience is built in for you.
 
-=== Configuration
+Configuration {#_configuration}
+-------------
 
 This gem can be configured via a global configuration:
 
-....
-$HOME/.config/rubysmith/configuration.yml
-....
+    $HOME/.config/rubysmith/configuration.yml
 
-It can also be configured via link:https://www.alchemists.io/projects/xdg[XDG] environment
-variables. The default configuration is as follows:
+It can also be configured via
+[XDG](https://www.alchemists.io/projects/xdg) environment variables. The
+default configuration is as follows:
 
-[source,yaml]
-----
+``` {.yaml}
 :author:
   :email:
   :family_name:
@@ -438,20 +501,23 @@ variables. The default configuration is as follows:
     :source:
     :versions:
   :version: 0.0.0
-----
+```
 
-Feel free to take this default configuration, modify, and save as your own custom
-`configuration.yml`.
+Feel free to take this default configuration, modify, and save as your
+own custom `configuration.yml`.
 
-By customizing your configuration, you can change Rubysmith's default behavior when building
-projects. This is a great way to define your own specialized settings other than what is provide for
-you by default. This is also a handy way to provide additional information needed for some of the
-build options. I'll walk you through each section of the configuration so you can learn more.
+By customizing your configuration, you can change Rubysmith's default
+behavior when building projects. This is a great way to define your own
+specialized settings other than what is provide for you by default. This
+is also a handy way to provide additional information needed for some of
+the build options. I'll walk you through each section of the
+configuration so you can learn more.
 
-==== Author
+### Author {#_author}
 
-Author information is used when generating project documentation and is recommended you fill this
-information in before building a project. Example:
+Author information is used when generating project documentation and is
+recommended you fill this information in before building a project.
+Example:
 
     :author:
       :email: jsmith@example.com
@@ -459,126 +525,151 @@ information in before building a project. Example:
       :given_name: Jill
       :url: https://www.exmaple.com/team/jsmith
 
-If your global link:https://git-scm.com[Git] configuration is properly configured, your given name;
-family name; and email will be used by default. Should you not want to defer to Git, you can supply
-custom values as desired. The URL is the only value that can't be automatically computed for you.
+If your global [Git](https://git-scm.com) configuration is properly
+configured, your given name; family name; and email will be used by
+default. Should you not want to defer to Git, you can supply custom
+values as desired. The URL is the only value that can't be automatically
+computed for you.
 
-==== Build
+### Build {#_build_2}
 
-All build options accept booleans values only and can be customized as desired. When changing your
-build options, they will dynamically render when displaying usage (i.e. `rubysmith --help`). All of
-these options have been explained in greater detail in the _Usage_ section.
+All build options accept booleans values only and can be customized as
+desired. When changing your build options, they will dynamically render
+when displaying usage (i.e. `rubysmith --help`). All of these options
+have been explained in greater detail in the *Usage* section.
 
-ℹ️ The `cli` option is provided to support the {gemsmith_link} gem but is not, currently, used by
-this project.
+ℹ️ The `cli` option is provided to support the
+[Gemsmith](https://www.alchemists.io/projects/gemsmith) gem but is not,
+currently, used by this project.
 
-==== Citations
+### Citations {#_citations}
 
-This section allows you to configure your link:https://orcid.org[ORCID]
-link:https://citation-file-format.github.io[citation] information used by the research community.
-You should definitely fill this in. Your author information, detailed above, will be used as well.
+This section allows you to configure your [ORCID](https://orcid.org)
+[citation](https://citation-file-format.github.io) information used by
+the research community. You should definitely fill this in. Your author
+information, detailed above, will be used as well.
 
-==== Documentation
+### Documentation {#_documentation}
 
-Use this section to define the kind of documentation you want generated for your project. The
-following options are available:
+Use this section to define the kind of documentation you want generated
+for your project. The following options are available:
 
-* `adoc` - Uses link:https://asciidoctor.org[ASCII Doc] format.
-* `md` - Use link:https://asciidoctor.org[Markdown] format.
+-   `adoc` - Uses [ASCII Doc](https://asciidoctor.org) format.
 
-==== Extensions
+-   `md` - Use [Markdown](https://asciidoctor.org) format.
 
-Extensions are additional tooling which can be configured specifically for Rubysmith. The following
-extensions are currently supported and will override each extensions global configuration should you
-be using them individually for other purposes:
+### Extensions {#_extensions}
 
-* link:https://www.alchemists.io/projects/milestoner[Milestoner]
-* link:https://www.alchemists.io/projects/pragmater[Pragmater]
-* link:https://www.alchemists.io/projects/tocer[Tocer]
+Extensions are additional tooling which can be configured specifically
+for Rubysmith. The following extensions are currently supported and will
+override each extensions global configuration should you be using them
+individually for other purposes:
 
-Follow the above links to learn more about each extension's gem configuration.
+-   [Milestoner](https://www.alchemists.io/projects/milestoner)
 
-==== GitHub
+-   [Pragmater](https://www.alchemists.io/projects/pragmater)
 
-Your GitHub user is the handle you setup when creating your GitHub account. This information is used
-for template, funding, and/or URL construction purposes.
+-   [Tocer](https://www.alchemists.io/projects/tocer)
 
-==== License
+Follow the above links to learn more about each extension's gem
+configuration.
 
-Use this section to define the license you want to use for your project. The following kinds of
-license are available:
+### GitHub {#_github_2}
 
-* *Apache*: Use `apache` as the name and then supply the appropriate label and version.
-* *Hippocratic*: Use `hippocratic` as the name and then supply the appropriate label and version.
-* *MIT*: Use `mit` as the name and then supply the appropriate label and version.
+Your GitHub user is the handle you setup when creating your GitHub
+account. This information is used for template, funding, and/or URL
+construction purposes.
 
-==== Project
+### License {#_license_2}
 
-There are two sub-categories within this section: URLs and version. The URLs allow you to link to
-specific documentation related to your project. You'll want to customize these URLs since they are
-used for documentation, citations, and general project information. Some of the URLs are also used
-by the {gemsmith_link} gem.
+Use this section to define the license you want to use for your project.
+The following kinds of license are available:
 
-You
-can also use `%project_name%` as a placeholder anywhere in your URL and Rubysmith will ensure your
-place holder is replaced with your project name when generating a new project. Example:
+-   **Apache**: Use `apache` as the name and then supply the appropriate
+    label and version.
 
-....
-# Configuration
-https://www.example.com/%project_name%
+-   **Hippocratic**: Use `hippocratic` as the name and then supply the
+    appropriate label and version.
 
-# Command
-rubysmith --build demo
+-   **MIT**: Use `mit` as the name and then supply the appropriate label
+    and version.
 
-# Actual (computed result)
-https://www.example.com/demo
-....
+### Project {#_project}
 
-As for the `version` key, this defines the default version of newly created projects. `0.0.0` is the
-default but you can use a higher version number like `0.1.0` or even `1.0.0` if you are super
-confident in your work. That said, the lower the number is better when building your initial
-project.
+There are two sub-categories within this section: URLs and version. The
+URLs allow you to link to specific documentation related to your
+project. You'll want to customize these URLs since they are used for
+documentation, citations, and general project information. Some of the
+URLs are also used by the
+[Gemsmith](https://www.alchemists.io/projects/gemsmith) gem.
 
-== Development
+You can also use `%project_name%` as a placeholder anywhere in your URL
+and Rubysmith will ensure your place holder is replaced with your
+project name when generating a new project. Example:
+
+    # Configuration
+    https://www.example.com/%project_name%
+
+    # Command
+    rubysmith --build demo
+
+    # Actual (computed result)
+    https://www.example.com/demo
+
+As for the `version` key, this defines the default version of newly
+created projects. `0.0.0` is the default but you can use a higher
+version number like `0.1.0` or even `1.0.0` if you are super confident
+in your work. That said, the lower the number is better when building
+your initial project.
+
+Development {#_development}
+===========
 
 To contribute, run:
 
-[source,bash]
-----
+``` {.bash}
 git clone https://github.com/bkuhlmann/rubysmith
 cd rubysmith
 bin/setup
-----
+```
 
 You can also use the IRB console for direct access to all objects:
 
-[source,bash]
-----
+``` {.bash}
 bin/console
-----
+```
 
-== Tests
+Tests {#_tests}
+=====
 
 To test, run:
 
-[source,bash]
-----
+``` {.bash}
 bundle exec rake
-----
+```
 
-== link:https://www.alchemists.io/policies/license[License]
+[License](https://www.alchemists.io/policies/license) {#_ulink_url_https_www_alchemists_io_policies_license_license_ulink}
+=====================================================
 
-== link:https://www.alchemists.io/policies/security[Security]
+[Security](https://www.alchemists.io/policies/security) {#_ulink_url_https_www_alchemists_io_policies_security_security_ulink}
+=======================================================
 
-== link:https://www.alchemists.io/policies/code_of_conduct[Code of Conduct]
+[Code of Conduct](https://www.alchemists.io/policies/code_of_conduct) {#_ulink_url_https_www_alchemists_io_policies_code_of_conduct_code_of_conduct_ulink}
+=====================================================================
 
-== link:https://www.alchemists.io/policies/contributions[Contributions]
+[Contributions](https://www.alchemists.io/policies/contributions) {#_ulink_url_https_www_alchemists_io_policies_contributions_contributions_ulink}
+=================================================================
 
-== link:https://www.alchemists.io/projects/rubysmith/versions[Versions]
+[Versions](https://www.alchemists.io/projects/rubysmith/versions) {#_ulink_url_https_www_alchemists_io_projects_rubysmith_versions_versions_ulink}
+=================================================================
 
-== link:https://www.alchemists.io/community[Community]
+[Community](https://www.alchemists.io/community) {#_ulink_url_https_www_alchemists_io_community_community_ulink}
+================================================
 
-== Credits
+Credits {#_credits}
+=======
 
-* Built with {gemsmith_link}.
-* Engineered by link:https://www.alchemists.io/team/brooke_kuhlmann[Brooke Kuhlmann].
+-   Built with [Gemsmith](https://www.alchemists.io/projects/gemsmith).
+
+-   Engineered by [Brooke
+    Kuhlmann](https://www.alchemists.io/team/brooke_kuhlmann).
