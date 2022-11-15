@@ -52,7 +52,6 @@ RSpec.describe Rubysmith::Configuration::Loader do
         'bin/rubocop',
         'config.ru',
         'Gemfile',
-        'Guardfile',
         'Rakefile',
       ],
       extensions_tocer_includes: [
