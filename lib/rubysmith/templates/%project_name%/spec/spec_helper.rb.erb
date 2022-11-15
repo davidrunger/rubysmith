@@ -18,15 +18,6 @@ require "<%= configuration.project_path %>"
 require "refinements"
 <% end %>
 
-<% if configuration.build_refinements %>
-using Refinements::Pathnames
-
-Pathname.require_tree __dir__, "support/shared_contexts/**/*.rb"
-<% else %>
-
-Dir[File.join(__dir__, 'support', 'shared_contexts', '**/*.rb')].each { |path| require path }
-<% end %>
-
 RSpec.configure do |config|
   config.color = true
   config.disable_monkey_patching!
