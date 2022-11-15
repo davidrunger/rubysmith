@@ -26,7 +26,6 @@ module Rubysmith
           Builders::Guard,
           Builders::Reek,
           Builders::RSpec::Binstub,
-          Builders::RSpec::Context,
           Builders::RSpec::Dotrspec,
           Builders::RSpec::Helper,
           Builders::RungerStyle,
