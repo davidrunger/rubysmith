@@ -23,7 +23,6 @@ module Rubysmith
           Builders::CircleCI,
           Builders::Setup,
           Builders::GitHub,
-          Builders::Guard,
           Builders::Reek,
           Builders::RSpec::Binstub,
           Builders::RSpec::Dotrspec,

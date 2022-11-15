@@ -63,7 +63,6 @@
       - bin/rubocop
       - config.ru
       - Gemfile
-      - Guardfile
       - Rakefile
   :tocer:
     :includes:
