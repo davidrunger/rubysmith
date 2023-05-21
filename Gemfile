@@ -9,7 +9,7 @@ gemspec
 group :code_quality do
   gem 'git-lint', '~> 4.0'
   gem 'reek', '~> 6.1'
-  gem 'runger_style', github: 'davidrunger/runger_style', require: false
+  gem 'runger_style', require: false
   gem 'simplecov', '~> 0.21', require: false
 end
 

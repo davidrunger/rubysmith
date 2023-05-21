@@ -81,7 +81,7 @@ RSpec.describe Rubysmith::Builders::Bundler do
           source "https://rubygems.org"
 
           group :code_quality do
-            gem 'runger_style', github: 'davidrunger/runger_style', require: false
+            gem 'runger_style', require: false
           end
         CONTENT
       end
@@ -360,7 +360,7 @@ RSpec.describe Rubysmith::Builders::Bundler do
 
           group :code_quality do
             gem "bundler-leak", "~> 0.2"
-            gem 'runger_style', github: 'davidrunger/runger_style', require: false
+            gem 'runger_style', require: false
             gem "git-lint", "~> 4.0"
             gem "reek", "~> 6.1"
             gem "simplecov", "~> 0.21", require: false
@@ -404,7 +404,7 @@ RSpec.describe Rubysmith::Builders::Bundler do
 
           group :code_quality do
             gem "bundler-leak", "~> 0.2"
-            gem 'runger_style', github: 'davidrunger/runger_style', require: false
+            gem 'runger_style', require: false
             gem "git-lint", "~> 4.0"
             gem "reek", "~> 6.1"
             gem "simplecov", "~> 0.21", require: false
